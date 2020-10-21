@@ -23,15 +23,33 @@ e.g.
 }
 
 ```
+and then a resonse like that would be shown
 
-## Challenge Description
+```
+{
+    "subTotal": "66.96 USD",
+    "taxes": "9.3744 USD",
+    "discounts": "0.1 off Shoes : 2.499    &   0.5 off T-shirt : 9.995",
+    "totalAmount": "63.84 USD"
+}
 
-***Write a program that can price a cart of products, accept multiple products, combine offers, and display a total detailed bill in different currencies (based on user selection).***
+```
 
-Available catalog products and their price in USD:
+```
+{
+    "subTotal": 495.67 EGP,
+    "taxes": 69.3952 EGP,
+    "discounts": "0.5 off T-shirt : 0",
+    "totalAmount": "565.08 EGP"
+}
 
-* T-shirt $10.99
-* Pants $14.99
-* Jacket $19.99
-* Shoes $24.99
+```
+
+
+***FOR using the simple unit test.***
+
+```
+php artisan test
+
+```
 

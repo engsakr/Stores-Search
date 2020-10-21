@@ -31,11 +31,12 @@ class CartController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * 
+     * 
      */
     public function process(Request $request)
     {
     
-        // var_dump($request->all()['currency_code']);die;
         $curr = $request->all()['currency_code'];//"USD";
         $products = $request->all()['products'];//["T-shirt","T-shirt","Shoes","Jacket"];
         $currObject = new CurrencyService();
@@ -71,10 +72,10 @@ class CartController extends Controller
         }
 
         return response()->json([
-            'subTotal' => $subTotal,
-            'taxes' => $taxes,
+            'subTotal' => $subTotal . " " . $curr,
+            'taxes' => $taxes . " " . $curr ,
             'discounts' => implode("    &   ",array_values(array_filter( $discounts, 'strlen' ))),
-            'totalAmount' => number_format($totalAmount, 2)
+            'totalAmount' => number_format($totalAmount, 2) . " " . $curr
         ]);
 
         
