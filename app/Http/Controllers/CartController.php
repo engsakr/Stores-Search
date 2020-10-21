@@ -72,7 +72,7 @@ class CartController extends Controller
 
         return response()->json([
             'subTotal' => $subTotal,
-            'taxes' => 'CA',
+            'taxes' => $taxes,
             'discounts' => implode("    &   ",array_values(array_filter( $discounts, 'strlen' ))),
             'totalAmount' => number_format($totalAmount, 2)
         ]);
