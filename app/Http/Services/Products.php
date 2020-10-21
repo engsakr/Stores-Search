@@ -1,9 +1,13 @@
 <?php
 
 namespace App\Http\Services;
+use App\Http\Helpers\General as GeneralHelper;
+
 
 class Products 
 {
+
+    use GeneralHelper;
 
     public $available_products; 
     
@@ -30,6 +34,11 @@ class Products
     // Getter of AvailableProducts (the setter was done inside the constructor)
     public function getAvailableProducts() {
       return $this->available_products;
+    }
+    
+    //get Product
+    public function getProduct($productName) {
+      return $this->getAvailableProducts()[$this->getArrayKeyByValue($this->getAvailableProducts(),"name",$productName)];
     }
 
 
