@@ -19,4 +19,4 @@ Route::get('/', function () {
 
 
 
-Route::get('/cart', 'CartController@process');
+Route::post('/cart', 'CartController@process');

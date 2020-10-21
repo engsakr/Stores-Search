@@ -1,43 +1,33 @@
 <?php
 
 /**
- * CartController : a php class to handle (control) processes of cart
  *
  * @author   Ahmed Sakr <prog.sakr@gmail.com>
  */
 
+namespace Tests\Feature;
 
-namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+use App\Http\Controllers\CartController;
 use App\Http\Services\Currency as CurrencyService;
 use App\Http\Services\Products as ProductService;
 use App\Http\Services\Tax;
-
-
-class CartController extends Controller
+class ProcessCartTest extends TestCase
 {
     use Tax;
-
     /**
-     * __construct function to identify the constants
-     */
-    public function __construct(){
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
+     * A basic feature test example.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return void
      */
-    public function process(Request $request)
+
+    public function testProcessWithExistInputs()
     {
-    
-        // var_dump($request->all()['currency_code']);die;
-        $curr = $request->all()['currency_code'];//"USD";
-        $products = $request->all()['products'];//["T-shirt","T-shirt","Shoes","Jacket"];
+
+        $curr = "USD";
+        $products = ["T-shirt","T-shirt","Shoes","Jacket"];
         $currObject = new CurrencyService();
         $subTotal=0.00;$taxes=0.00;$discounts=[];$discountsAmount=0.00;$total=0.00;
         $i = 0;
@@ -70,15 +60,19 @@ class CartController extends Controller
             $i++;
         }
 
-        return response()->json([
-            'subTotal' => $subTotal,
-            'taxes' => 'CA',
-            'discounts' => implode("    &   ",array_values(array_filter( $discounts, 'strlen' ))),
-            'totalAmount' => number_format($totalAmount, 2)
-        ]);
-
-        
     }
 
+    public function testCheckMainPage()
+    {
+        $response = $this->get('/');
 
+        $response->assertStatus(200);
+    }
+    
+    public function testProcessWithEmptyInputs()
+    {
+        $response = $this->post('/cart');
+
+        $response->assertStatus(500);
+    }
 }
