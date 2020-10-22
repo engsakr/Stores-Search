@@ -75,7 +75,7 @@ class Products
           $amountOfPercentage = ($product['amount'] * $percentage);//10% off shoes: -$2.499
           return ["discount"=>$amountOfPercentage,"query" => "$percentage off $productName : $amountOfPercentage"];
       
-        }elseif($product['has_sale'] == true && $product['method_of_discount'] == 2 ){ // apply the first algorithm of '(item)/(percentage)'
+        }elseif($product['has_sale'] == true && $product['method_of_discount'] == 2 ){ // apply the second algorithm of '(number of items)/(item)/(percentage)(the sale item)'
           $getThings = explode("/",$product['discount']);
           $condition = (int) $getThings[0];
           $productName = $getThings[1];
