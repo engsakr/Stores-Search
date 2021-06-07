@@ -1,3 +1,5 @@
+# What is this simple project about.
+- this is about how to search and get results from all stored suppliers / stores
 # How To Run Test.
 1- clone the project.
 2- at first install composer to add the required libs for the project
